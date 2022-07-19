@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: landing.gettingstarted.html 
+summary: Page de démarrage pour VDMS 
+keywords:  
+---
+= Étapes de démarrage pour le succès de VDMS
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Qu'est-ce que VDMS ?
+
+Virtual Desktop Managed Service (VDMS) est la solution Managed DaaS de NetApp qui vous permet de sous-traiter le provisionnement, le déploiement et l'infrastructure des postes de travail virtuels, vous permettant ainsi de vous concentrer sur vos utilisateurs et applications, pour un forfait mensuel unique par utilisateur.
+
+image::landing.gettingstarted-3b8c5.png[landing.gettingstarted 3b8c5]
+
+
+
+== Configuration de VDMS
+
+Le projet d'implémentation VDMS comprend les éléments suivants :
+
+. link:serviceoffering.prerequisites.html["Prérequis"]
+. Réunion téléphonique de lancement pour la révision de l'environnement du client
+. NetApp fournit votre infrastructure et votre espace de travail WVD
+. Sessions de formation en direct interactives
+. Ajoutez vos données, applications et utilisateurs à votre WVD personnalisé
+. Testez l'environnement, les postes de travail des utilisateurs et la connectivité
+. Lancement !
+
+
+
+
+== Et la suite ?
+
+Pour assurer un déploiement réussi et rapide, commencez par les étapes ci-dessous :
+
+. Obtenir link:serviceoffering.prerequisites.html#m365-licensing["Licences Microsoft 365 appropriées"] pour vos utilisateurs
+. Créez une liste d'utilisateurs VDMS
+. Créez une liste d'applications, de supports, de licences et d'informations sur le fournisseur. Notez toute base de données ou application existante qui peut nécessiter des considérations spéciales ou une assistance du fournisseur
+. Identifier les données à transférer
+. Si vous déployez avec une instance Active Directory existante, vérifiez-les link:serviceoffering.prerequisites.html#existing-ad-integration["prérequis supplémentaires"]
+

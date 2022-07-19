@@ -1,0 +1,15 @@
+= Méthodologie d'exécution des applications
+:allow-uri-read: 
+
+
+
+
+== Méthodologie d'exécution des applications
+
+Les utilisateurs peuvent accéder à toutes les applications installées sur la machine virtuelle de l'hôte de session (SHVM) sur laquelle leur session utilisateur est exécutée.
+
+Les utilisateurs sont affectés à un pool de SHVM (« pool hôte ») en fonction de leur appartenance à un groupe d'utilisateurs. Chaque SHVM de ce pool hôte est basé sur la même image VM, dispose des mêmes applications et s'exécute sur les mêmes ressources VM. Chaque fois qu'un utilisateur se connecte, il est affecté à SHVM dans son pool hôte avec le moins de sessions utilisateur en cours.
+
+En ajoutant ou en supprimant des applications de chaque SHVM dans le pool hôte, l'administrateur VDMS peut contrôler les applications auxquelles les utilisateurs VDMS peuvent accéder.
+
+Il est possible d'ajouter (ou de supprimer) des applications de chaque SHVM directement sur chaque SHVM ou sur une seule image VM qui, à son tour, peut être déployée sur toutes les SHVM du pool hôte.

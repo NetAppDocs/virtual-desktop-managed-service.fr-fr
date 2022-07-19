@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: users.assigntoappgroup.html 
+summary: 'Affectation d"utilisateurs à des groupes d"applications dans VDMS' 
+keywords:  
+---
+= Affectation d'utilisateurs à des groupes d'applications
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Méthodologie d'affectation des utilisateurs
+
+Les utilisateurs sont affectés à une machine virtuelle hôte de session (SHVM) via des groupes de sécurité AD.
+
+Pour chaque pool d'hôtes, il existe un groupe d'utilisateurs lié dans l'onglet « utilisateurs et groupes » de l'espace de travail.
+
+Les groupes d'utilisateurs sont nommés avec l'ID d'espace de travail (un code unique à 3-4 chiffres pour chaque espace de travail), suivi du nom du pool d'hôtes.
+
+Par exemple, le groupe "jzsx Shared Users" est lié au pool hôte utilisateurs partagés dans VDMS. Tous les utilisateurs ajoutés à « jzsx Shared Users » reçoivent un accès aux hôtes de session dans le pool d'hôtes « Shared Users ».
+
+.Pour affecter un utilisateur à son pool d'hôtes
+. Accédez à « utilisateurs et groupes » dans l'espace de travail
+. Les utilisateurs peuvent être ajoutés au groupe en modifiant la liste des utilisateurs dans le groupe.
+. L'automatisation synchronise automatiquement les membres du groupe d'utilisateurs de sorte que l'utilisateur puisse accéder au pool d'hôtes, au groupe d'applications et aux applications appropriés.
+
+
+
+NOTE: Les utilisateurs ne doivent être affectés qu'à un (et à un seul) groupe d'applications. Le type de pool hôte (partagé, VDI ou GPU) doit correspondre aux références sous licence achetées pour VDMS. Un mauvais alignement des utilisateurs et/ou l'affectation à plusieurs groupes d'applications causera des problèmes de conflit de ressources et pourrait avoir un impact sur leurs collègues travaillant dans l'environnement.

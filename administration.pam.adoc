@@ -1,0 +1,79 @@
+---
+sidebar: sidebar 
+permalink: administration.pam.html 
+summary: 'Obtention d"un accès aux domaines aux machines virtuelles VDMS' 
+keywords:  
+---
+= Générer les informations d'identification d'administrateur de domaine dans VDMS
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Gestion des accès privilégiés
+
+Les administrateurs VDM peuvent se voir attribuer le rôle « approbateur PAM » qui permet à l'administrateur d'accorder des demandes PAM.
+
+Les demandes PAM génèrent un compte d'administrateur au niveau du domaine à utiliser pour s'authentifier sur les machines virtuelles VDMS lorsque les informations d'identification d'administrateur local ne sont pas suffisantes.
+
+Tout administrateur VDMS peut soumettre une demande PAM, mais seuls les administrateurs ayant le rôle d'approbateur PAM peuvent approuver les demandes. Un approbateur PAM peut à la fois demander et approuver sa propre demande.
+
+
+
+=== Soumettre une demande PAM
+
+.Pour envoyer une demande PAM
+. Accédez à votre nom d'utilisateur administrateur dans le coin supérieur droit et cliquez sur Paramètres.
+. Sélectionnez l'onglet « demandes PAM »
+. Cliquez sur + Ajouter.
++
+.. Sélectionnez une durée après laquelle ces informations d'identification expirent
+.. Choisir le déploiement
+.. Entrez une adresse e-mail que les informations d'identification peuvent fournir. Il peut s'agir de n'importe quelle adresse e-mail, permettant à des tiers (par exemple un fournisseur) d'obtenir des informations d'identification de domaine.
+.. Entrez un numéro de téléphone pouvant recevoir des messages texte
+.. Saisissez les notes pour les journaux et pour que l'approbateur PAM puisse les consulter.
+
+
+. Cliquez sur « Ajouter une demande »
+
+
+
+
+=== Approuver une demande de PAM
+
+.Pour examiner et approuver/rejeter une demande PAM
+. . Accédez à votre nom d'utilisateur administrateur dans le coin supérieur droit et cliquez sur Paramètres.
+. Sélectionnez l'onglet "demandes PAM" et cliquez sur la demande
+. Passez en revue la demande et cliquez sur « approuver » ou « rejeter ».
+. Saisissez toute note pertinente à la décision d'approbation/de rejet
+
+
+
+
+=== Utilisation des informations d'identification générées par PAM
+
+Une fois approuvée, l'adresse e-mail fournie est envoyée à un e-mail de confirmation pour activer ses informations d'identification :
+
+[role="thumb"]
+image:administration.pam-c2382.png["900,900"]
+
+Le lien « Activer la demande » permet à l'utilisateur d'accéder à la page suivante et de lui envoyer un code de confirmation par SMS. Il leur sera également demandé de définir un mot de passe sécurisé.
+
+[role="thumb"]
+image:administration.pam-ea1ea.png["900,900"]
+
+Une fois le compte validé avec succès, l'utilisateur reçoit une confirmation avec son nom d'utilisateur.
+
+[role="thumb"]
+image:administration.pam-01f30.png["900,900"]

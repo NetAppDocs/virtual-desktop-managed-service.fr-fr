@@ -1,0 +1,100 @@
+---
+sidebar: sidebar 
+permalink: serviceoffering.prerequisites.html 
+summary: Prérequis VDM 
+keywords:  
+---
+= Conditions préalables au service VDMS (Virtual Desktop Managed Service)
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Licence M365
+
+VDM est conçu avec la technologie Microsoft Windows Virtual Desktop (WVD). Les conditions préalables à WVD requièrent que les utilisateurs finaux reçoivent une licence Microsoft 365 (M365) spécifique. Ces licences ne sont pas incluses dans l'abonnement VDMS, et NetApp ne vend pas ces licences ou les propose autrement.
+
+La conformité de la licence M365/WVD est maintenue avec la société cliente, la société partenaire et/ou le fournisseur M365.
+
+Il existe une variété de plans M365 qui prennent en charge la licence WVD pour VDMS, les détails peuvent être link:https://azure.microsoft.com/en-us/pricing/details/virtual-desktop/["trouvé ici"].
+
+
+
+== Locataire AD M365/Azure
+
+Le client doit disposer d'un locataire Azure AD existant. Microsoft 365 repose sur la même structure de locataires Azure AD, c'est pourquoi il sera également satisfait aux exigences relatives aux licences M365 (ci-dessus).
+
+
+
+== Relation de revendeur avec le FST
+
+NetApp déploie VDMS dans un abonnement Azure dédié en utilisant notre relation de fournisseur de services de télécommunications avec Microsoft. Pour déployer cet abonnement, NetApp doit établir une relation de revendeur avec le locataire Azure AD du client. Un administrateur global pour le locataire Azure AD du client peut accepter cette relation ici :
+
+https://admin.microsoft.com/Adminportal/Home?invType=ResellerRelationship&partnerId=47c1f6d2-b112-48e0-915f-4304efffb3e8&msppId=0&DAP=true#/BillingAccounts/partner-invitation[]
+
+Les fonctionnalités multi-partenaires ne sont pas les suivantes :
+
+* Modifier les abonnements existants du client
+* Effectuer la transition des abonnements existants ou de la propriété du compte du client
+* Modifiez les conditions ou les obligations du client pour l'un de ses abonnements existants
+* Modifiez le partenaire d'enregistrement pour un abonnement
+* Plus de détails à ce sujet : https://docs.microsoft.com/en-us/partner-center/multipartner[]
+
+
+
+
+=== Droits d'administrateur délégués
+
+Le lien d'invitation (ci-dessus) inclut une demande d'autorisations d'administration déléguées. Seront acceptés pour octroyer des rôles administrateur NetApp Global Admin et Helpdesk au locataire Azure AD du client.
+
+
+
+== Portée du réseau virtuel
+
+LES VDM seront déployés sur un réseau virtuel dans Azure. La plage IP /20 utilisée pour ce réseau ne peut pas se chevaucher avec d'autres réseaux de leur environnement.
+
+Dans tous les scénarios qui ajoutent une connectivité réseau entre le réseau virtuel VDMS et tout autre réseau client, le chevauchement avec une autre gamme IP réseau rompent les VDMS. Il est donc essentiel qu'une gamme /20 complètement inutilisée soit dédiée à VDMS.
+
+L'étendue du réseau /20 doit être comprise dans l'une des plages IP suivantes :
+
+* 10.0.0.0 – 10.255.255.255
+* 172.16.0.0 – 172.31.255.255
+* 192.168.0.0 – 192.168.255.255
+
+
+
+
+== Déployer la fiche VDMS
+
+Le client/partenaire doit remplir la fiche technique VDMS de déploiement à l'adresse :https://www.deployvdms.com/[]
+
+
+
+== Intégration AD existante
+
+L'intégration de VDMS à un contrôleur de domaine Active Directory existant (AD DC) nécessite plusieurs prérequis supplémentaires :
+
+
+
+=== Informations d'identification de l'administrateur du domaine local
+
+Un compte d'administrateur de domaine local avec des droits domainjoin, sur le domaine existant est nécessaire pour établir l'intégration.
+
+
+
+=== Azure AD Connect
+
+WVD requiert la synchronisation d'Azure AD avec AD DC à l'aide d'AD Connect. Si ce n'est pas déjà fait, ceci link:https://www.microsoft.com/en-us/download/details.aspx?id=47594["informatique"] Devra être installé et configuré sur votre AD DC.
+
+/===== rôle Network Contributor pour vnet peering /===== droits d'administrateur de périphérique de passerelle locale pour configurer VPN /==== zones DNS (besoin d'informations techniques supplémentaires) /==== pas de multi-domaine forREST, les utilisateurs doivent se trouver dans le domaine sur qui nous sommes déployés

@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: users.remove.html 
+summary: 'Suppression de l"accès utilisateur dans VDMS' 
+keywords:  
+---
+= Suppression de l'accès utilisateur
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Suppression d'un utilisateur
+
+.Nouveaux déploiements Active Directory (un nouveau domaine Active Directory a été créé pour VDMS)
+. Supprimez l'utilisateur dans VDMS
++
+.. Accédez à l'espace de travail, sélectionnez l'onglet utilisateurs et groupes, cliquez sur les points d'action à côté de l'utilisateur à supprimer, puis cliquez sur « Supprimer ».image:users.remove01.png["900,900"]
+.. Une fenêtre contextuelle s'affiche avec les options délai de suppression et Supprimer du répertoireimage:users.remove02.png["900,900"]
++
+... L'option délai de suppression attend 90 minutes avant de supprimer l'utilisateur, ce qui permet d'annuler le processus. Il est recommandé de cocher cette case.
+... L'option Supprimer du répertoire supprimera le compte d'utilisateur Active Directory. Cette case doit être cochée.
+
+
+
+
+. Notifier NetApp de la suppression d'utilisateur via l'une des méthodes ci-dessous
++
+.. Support par e-mail : VDSsupport@netapp.com
+.. Assistance téléphonique : 844.645.6789
+.. link:https://cloudjumper.zendesk.com["Portail d'assistance VDM"]
+
+
+
+
+.Déploiements Active Directory existants (VDMS se connecte à un Active Directory existant)
+. Supprimez l'utilisateur dans VDMS
++
+.. Accédez à l'espace de travail, sélectionnez l'onglet utilisateurs et groupes, cliquez sur les points d'action à côté de l'utilisateur à supprimer, puis cliquez sur « Supprimer ».image:users.remove01.png["900,900"]
+.. Une fenêtre contextuelle s'affiche avec les options délai de suppression et Supprimer du répertoireimage:users.remove03.png["900,900"]
++
+... L'option délai de suppression attend 90 minutes avant de supprimer l'utilisateur, ce qui permet d'annuler le processus. Il est recommandé de cocher cette case.
+... L'option Supprimer du répertoire supprimera le compte d'utilisateur Active Directory. Il est recommandé que cette case NE soit PAS cochée et que le processus de suppression du compte utilisateur de vos organisations soit suivi pour supprimer le compte d'Active Directory.
+
+
+
+
+. Notifier NetApp de la suppression d'utilisateur via l'une des méthodes ci-dessous
++
+.. Support par e-mail : VDSsupport@netapp.com
+.. Assistance téléphonique : 844.645.6789
+.. link:https://cloudjumper.zendesk.com["Portail d'assistance VDM"]
+
+
+

@@ -1,0 +1,108 @@
+---
+sidebar: sidebar 
+permalink: images.updateimages.html 
+summary: 'Mise à jour et déploiement d"images de machines virtuelles dans VDMS' 
+keywords:  
+---
+= Mise à jour et déploiement des images de machine virtuelle
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Méthodologie d'exécution des applications
+
+Les utilisateurs peuvent accéder à toutes les applications installées sur la machine virtuelle de l'hôte de session (SHVM) sur laquelle leur session utilisateur est exécutée.
+
+Les utilisateurs sont affectés à un pool de SHVM (« pool hôte ») en fonction de leur appartenance à un groupe d'utilisateurs. Chaque SHVM de ce pool hôte est basé sur la même image VM, dispose des mêmes applications et s'exécute sur les mêmes ressources VM. Chaque fois qu'un utilisateur se connecte, il est affecté à SHVM dans son pool hôte avec le moins de sessions utilisateur en cours.
+
+En ajoutant ou en supprimant des applications de chaque SHVM dans le pool hôte, l'administrateur VDMS peut contrôler les applications auxquelles les utilisateurs VDMS peuvent accéder.
+
+Il est possible d'ajouter (ou de supprimer) des applications de chaque SHVM directement sur chaque SHVM ou sur une seule image VM qui, à son tour, peut être déployée sur toutes les SHVM du pool hôte.
+
+Cet article aborde la gestion des images VM. L'installation directe d'applications sur les SHVM est couverte dans link:applications.installapplications.html["cet article"].
+
+
+
+=== Mise à jour de l'image VM
+
+La méthode recommandée pour ajouter (ou supprimer) des applications aux SHVM consiste à modifier l'image VM attribuée au pool hôte. Une fois l'image de la machine virtuelle personnalisée et validée, l'équipe de support VDMS peut la déployer sur demande sur toutes les SHVM du pool hôte.
+
+.Comment modifier l'image de la machine virtuelle
+. Naviguez dans « Provisioning Collections » au sein du déploiement sur le portail VDS
+. Cliquez sur la collection d'approvisionnement associée au pool d'hôtes que vous souhaitez mettre à jour.
++
+[role="thumb"]
+image:applications.addtoapplibrary-fdcc3.png["900,900"]
+
++
+.. Notez le nom du « modèle VM » dans la section « serveurs ».
++
+[role="thumb"]
+image:applications.deployapps-0e39c.png["900,900"]
+
++
+[role="thumb"]
+image:applications.deployapps-c642c.png["900,900"]
+
+
+
+. Modifiez le modèle de serveur en vous assurant que le modèle source est le modèle de machine virtuelle noté à l'étape 2.a. ci-dessus. Cliquez sur « Continuer ».
++
+[role="thumb"]
+image:applications.deployapps-307cb.png[""]
+
+
+
+
+NOTE: *Ne modifiez pas ces paramètres :* 1. Type = VDI 2. Share Drive = vide 3. Cache minimum = 0 4. Lecteur de données = 5 non vérifié. Type de stockage = Standard_LRS
+
+. L'automatisation VDMS va maintenant créer une machine virtuelle temporaire dans Azure, le nom de la machine sera _CWT#_. La création de cette machine virtuelle peut prendre 25 minutes. Une fois le processus terminé, l'état devient « en attente »
++
+.. Notez que ce VM s'exécutera jusqu'à la fin du processus de personnalisation. Il est donc important de concevoir, de personnaliser et de valider la machine virtuelle en une journée ou deux.
+
+
+. Une fois la machine virtuelle temporaire prête, vous pouvez vous connecter à la machine virtuelle en modifiant la Collection de provisionnement, puis en cliquant sur « Connect » (connexion) sur le serveur.
++
+.. Lorsque vous êtes invité à fournir des informations d'identification, les informations d'identification d'administrateur de domaine peuvent être générées par n'importe quel administrateur VDMS disposant de droits « approbateur PAM ».
+
+
+
+
+.Comment déployer une image de machine virtuelle mise à jour
+. Une fois l'image VM validée, contactez l'équipe d'assistance VDMS pour planifier une actualisation des images.
+. L'équipe va créer de nouveaux hôtes de session en fonction de la nouvelle image.
++
+.. Si nécessaire, coordonnez le temps de test des nouveaux hôtes avant de rediriger les nouveaux utilisateurs vers les nouveaux hôtes.
+
+
+. Une fois prête, l'équipe de support redirige toutes les nouvelles sessions utilisateur vers les nouveaux hôtes. Une fois qu'aucun utilisateur n'est connecté, nous éteinerons les anciens hôtes. Ces anciennes machines virtuelles resteront dans un état de gestion pour le basculement à chaud, mais ces machines virtuelles seront automatiquement supprimées au bout de 7 jours.
+
+
+
+
+=== Changer directement les SHVM
+
+Les modifications peuvent être effectuées directement sur les SHVM manuellement ou via les outils d'automatisation disponibles. Pour plus d'informations, consultez le link:applications.installapplications.html["cet article"].
+
+Lorsque vous apportez des modifications directement aux SHVM dans un pool d'hôtes, il est essentiel que chaque SHVM reste configuré de la même manière ou que les utilisateurs aient des expériences incohérentes lorsqu'ils se connectent à différents SHVM.
+
+
+WARNING: Par défaut, les SHVM individuels ne sont pas sauvegardés parce qu'ils ne disposent généralement pas de données uniques et sont basés sur une image de machine virtuelle standardisée. Si vous effectuez des personnalisations directement sur les SHVM, contactez le support pour appliquer une stratégie de sauvegarde à l'un des SHVM du pool hôte.
+
+
+
+=== Dépannage Sysprep
+
+La fonction « Valider » de l'image VDMS utilise l'utilitaire Sysprep de Microsoft. Lorsque la validation échoue, le coupable le plus courant est un échec Sysprep. Pour résoudre les pannes, démarrez dans le fichier journal Sysprep situé sur la machine virtuelle CWT# dans le chemin d'accès : C:\Windows\system32\Sysprep\panther\setupact.log

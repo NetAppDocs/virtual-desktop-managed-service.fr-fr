@@ -1,0 +1,134 @@
+---
+sidebar: sidebar 
+permalink: serviceoffering.servicesummary.html 
+summary: 'Résumé de l"offre de service VDM' 
+keywords:  
+---
+= Récapitulatif du service VDMS (Virtual Desktop Managed Service)
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Allocation de ressources utilisateur
+
+
+NOTE: Cet article vise à décrire avec précision les détails techniques du service VDMS. Les détails des services sont susceptibles d'être modifiés et cet article ne représente pas un amendement ni une modification des accords, contrats ou accords existants entre NetApp et tout client ou partenaire.
+
+
+
+=== Utilisateurs partagés (référence : VDM-SUBS-UTILISATEUR-PARTAGÉ)
+
+Les sessions utilisateur partagées s'exécutent sur une machine virtuelle hôte de session (SHVM) avec jusqu'à 10 sessions utilisateur. Le nombre total de SHVM partagés alloués garantit au moins une SHVM partagée pour 10 utilisateurs partagés dans l'environnement.
+
+*Ressources allouées par utilisateur partagé:*
+
+* 8 000 vCPU de cœur
+* 6.4 Gio de RAM
+* 25 Gio de stockage
+
+
+*Détails techniques partagés du SHVM:*
+
+* Généralement à partir du link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series["Esv3"], link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev4-esv4-series["Eav4"] et link:https://docs.microsoft.com/en-us/azure/virtual-machines/eav4-easv4-series["Easv4"] Gammes de machines virtuelles Azure.
+* Disque SSD OS standard de 128 Gio
+* Windows 10 Enterprise pour Virtual Desktop
+* Profil utilisateur des conteneurs attachés FSLogix
+* Stockage associé pour la part de l'entreprise
+
+
+
+
+=== UTILISATEURS VDI (RÉFÉRENCE : VDM-SUBS-UTILISATEUR VDI)
+
+Une session d'utilisateur VDI s'exécute sur une machine virtuelle d'hôte de session dédiée (SHVM) qui n'héberge pas simultanément d'autres sessions d'utilisateur. Le nombre total de SHVM VDI est égal au nombre total d'utilisateurs VDI dans l'environnement.
+
+*Ressources allouées par utilisateur VDI :*
+
+* Cœurs de 2 processeurs virtuels
+* 8 Gio de RAM
+* 25 Gio de stockage
+
+
+*Détails techniques de la VDI SHVM:*
+
+* Généralement à partir du link:https://docs.microsoft.com/en-us/azure/virtual-machines/dv3-dsv3-series["Dsv3"], link:https://docs.microsoft.com/en-us/azure/virtual-machines/dv4-dsv4-series["D24"] et link:https://docs.microsoft.com/en-us/azure/virtual-machines/dav4-dasv4-series["Dasv4"] Gammes de machines virtuelles Azure.
+* Disque dur standard de 128 Gio
+* Windows 10 Enterprise pour Virtual Desktop
+* Profil utilisateur des conteneurs attachés FSLogix
+* Stockage associé pour la part de l'entreprise
+
+
+
+
+=== UTILISATEURS GPU (RÉFÉRENCE : VDM-SUBS-GPU-UTILISATEUR)
+
+Une session d'utilisateur GPU s'exécute sur une machine virtuelle d'hôte de session dédiée (SHVM) qui n'héberge pas simultanément d'autres sessions d'utilisateur. Le nombre total de SHVM GPU est égal au nombre total d'utilisateurs GPU dans l'environnement.
+
+*Ressources allouées par utilisateur GPU :*
+
+* GPU RAM 8 Gio
+* 25 Gio de stockage
+
+
+*Détails techniques du processeur graphique SHVM:*
+
+* Généralement à partir du link:https://docs.microsoft.com/en-us/azure/virtual-machines/nvv3-series["NVv3"] et link:https://docs.microsoft.com/en-us/azure/virtual-machines/nvv4-series["NVv4"] Gammes de machines virtuelles Azure.
+* Disque dur standard de 128 Gio
+* Windows 10 Enterprise pour Virtual Desktop
+* Profil utilisateur des conteneurs attachés FSLogix
+* Stockage associé pour la part de l'entreprise
+
+
+
+
+== Autres références VDMS
+
+
+
+=== Serveurs business (référence : VDM-AZURE-BUSINESS-VM)
+
+Le serveur professionnel peut être ajouté à un environnement pour prendre en charge les applications et les services.
+
+*Chaque VM de serveur d'entreprise est allouée au moins :*
+
+* Cœurs de 8 processeurs virtuels
+* 64 Gio de RAM
+* Disque SSD OS standard de 128 Gio
+* Windows Server 2012R2/2016/2019
+* Généralement à partir du link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series["Esv3"], link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev4-esv4-series["Eav4"] et link:https://docs.microsoft.com/en-us/azure/virtual-machines/eav4-easv4-series["Easv4"] Gammes de machines virtuelles Azure.
+
+
+
+
+=== Stockage supplémentaire (référence : VDM-1 To-STORAGE-HPRSCLR)
+
+La _couche de stockage de données_ est le mécanisme de stockage principal de l'environnement VDMS et elle s'exécute sur Azure Files ou Azure NetApp Files (ANF). La technologie de stockage utilisée est déterminée par le nombre total d'utilisateurs VDMS achetés. Il est possible d'ajouter de la capacité par incréments de Tio.
+
+Les profils utilisateur, les données utilisateur, les partages de la société, les données d'application et les bases de données doivent tous s'exécuter à partir de ce service de stockage. Il est préférable d'éviter autant que possible de stocker les données sur les disques des machines virtuelles.
+
+La capacité correspond à la somme de l'allocation par utilisateur (25 Gio/utilisateur) et du stockage TIBs supplémentaire acheté.
+
+|===
+| Métrique | link:https://docs.microsoft.com/en-us/azure/storage/files/storage-files-scale-targets#storage-account-scale-targets["Azure Files GPv2"] | link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels["ANF Standard"] | link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels["ANF Premium"] 
+
+
+| Nombre d'utilisateurs | 10-49 | 50-249 | 250+ 
+
+
+| Taille minimale | 250 Gio | 4 To | 4 To 
+
+
+| D'IOPS | Jusqu'à 1,000 | Jusqu'à 250 Tio | Jusqu'à 1,000 Tio 
+|===

@@ -1,0 +1,119 @@
+---
+sidebar: sidebar 
+permalink: FAQ.vdsadminpermissions.html 
+summary: Résumé des autorisations admin VDS 
+keywords:  
+---
+= Autorisations d'administrateur VDS
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Présentation des autorisations d'administration
+
+Les administrateurs VDM n'ont qu'un accès limité au portail d'administration VDS. Comme VDMS est une solution co-gérée, il existe des ensembles d'autorisations qui ne sont pas activés pour les administrateurs VDMS. Ces actions sont réservées à l'équipe de support NetApp. Si des actions ne peuvent pas être effectuées en raison de restrictions d'autorisation, veuillez contacter l'assistance pour obtenir de l'aide.
+
+
+
+== Paramètres de type de compte
+
+Dans le compte d'administrateur VDMS, les paramètres suivants sont par défaut :
+
+[cols="3*"]
+|===
+| Type | Valeur par défaut | Remarques 
+
+
+| Compte technique | Faux | Il peut être modifié sur demande auprès du support NetApp. Lorsque cette option est activée, l'administrateur est invité à saisir les informations d'identification lors de la connexion à n'importe quelle machine virtuelle via le portail VDS. Lorsque cette option est désactivée, l'administrateur est automatiquement authentifié (avec compte d'administrateur local généré automatiquement) lors de la connexion à une VM locataire via le portail VDS. Les administrateurs sont toujours invités à fournir des informations d'identification lors de la connexion à des machines virtuelles de serveur de plate-forme. 
+
+
+| link:administration.pam.html["Approbateur PAM"] | Vrai | Il peut être modifié sur demande auprès du support NetApp. Tous les clients doivent avoir au moins un compte administrateur activé en tant qu'approbateur PAM. 
+
+
+| Support utilisateur | Faux | Cette fonction ne s'applique pas au VDMS. 
+
+
+| Utilisateur de l'ombre | Vrai | Il peut être modifié sur demande auprès du support NetApp. Lorsqu'il est activé, l'administrateur peut se connecter à la session d'un utilisateur final et voir ce qu'il voit pour fournir une assistance à l'utilisateur final. 
+
+
+| MFA activée | Vrai | Nécessite que l'accès de l'administrateur au portail d'administration VDMS soit sécurisé à l'aide de l'authentification MFA intégrée. Les méthodes SMS et/ou e-mail sont prises en charge. 
+|===
+
+
+== Autorisations de compte administrateur
+
+Dans le compte d'administrateur VDMS, les autorisations suivantes sont par défaut.
+
+[cols="6*"]
+|===
+| Module | Afficher | Modifier | Supprimer | Autres | Remarques 
+
+
+| Admin | Marche | Éteint | Marche | Éteint | Le support NetApp assure la gestion de l'ajout de comptes d'administration et/ou de la modification des autorisations d'administration. 
+
+
+| Services d'applications | Éteint | Éteint | Éteint | Éteint | L'ensemble de fonctionnalités App Services n'est pas pris en charge dans VDMS. 
+
+
+| En termes de latence | Éteint | Éteint | Éteint | Éteint | La fonction applications dans VDS est spécifique à RDS. VDM est un service basé sur WVD et la gestion des applications n'est pas gérée avec cette fonction. Voir link:mages.updateimages.html["mettre à jour et déployer des images"] Pour plus de détails sur la livraison des applications pour VDMS. 
+
+
+| Audits | Marche | Marche | Marche | Marche |  
+
+
+| Clients | Marche | Marche | Éteint | Éteint | La création/suppression du client est gérée par le support NetApp. 
+
+
+| De nombreux déploiements | Marche | Marche | Éteint | Éteint | La création/le retrait du déploiement est géré par le support NetApp. 
+
+
+| Règles de pare-feu | Marche | Marche | Marche | Marche |  
+
+
+| Dossiers | Marche | Marche | Marche | Marche |  
+
+
+| Groupes | Marche | Marche | Éteint | Marche | La suppression des groupes d'utilisateurs est assurée par le support NetApp. Certains groupes d'utilisateurs sont requis 
+
+
+| Partenaires | Marche | Éteint | Éteint | Éteint | Le jeu de fonctions partenaires n'est pas pris en charge dans VDMS. Affichez les autorisations requises pour afficher les listes de locataires. 
+
+
+| Modèles de provisionnement | Marche | Marche | Éteint | Éteint | La création/suppression d'images est gérée par le support NetApp. 
+
+
+| Rapports | Marche | Marche | Marche | Marche |  
+
+
+| Ressources | Marche | Éteint | Éteint | Éteint | Les paramètres des ressources sont gérés par le support NetApp. 
+
+
+| Événements avec script | Marche | Marche | Marche | Marche |  
+
+
+| Serveurs | Marche | Marche | Éteint | Éteint | Les paramètres de création/suppression du serveur sont gérés par le support NetApp. 
+
+
+| Tableau de service | Marche | Marche | Marche | Marche |  
+
+
+| Paramètres | Marche | Marche | Marche | Marche |  
+
+
+| Utilisateurs | Marche | Marche | Marche | Marche |  
+
+
+| Espaces de travail | Marche | Marche | Éteint | Éteint | La création/suppression d'espace de travail est gérée par le support NetApp. 
+|===
